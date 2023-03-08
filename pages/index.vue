@@ -1,5 +1,5 @@
 <template>
-  <div>Test</div>
+  <navbar-menu></navbar-menu>
 </template>
 
 <style lang="scss">
