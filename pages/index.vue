@@ -1,48 +1,70 @@
 <template>
   <navbar-menu></navbar-menu>
   <content-wrapper>
-    <form @submit.prevent="handleSearch">
-      <input type="text" placeholder="Search for a role here" v-model="searchQuery" />
+    <form
+      @submit.prevent="
+        handleSearch({
+          title: this.searchQuery,
+          location: this.location,
+          sort: this.sort,
+          page: this.page,
+        })
+      "
+    >
+      <input
+        type="text"
+        placeholder="Search for a role here"
+        v-model="searchQuery"
+      />
       <button type="submit">Submit</button>
     </form>
     <main>
-      <div v-if="loading">
+      <div v-if="pending">
         <p>Loading..</p>
       </div>
-      <job-card v-for="job in jobs" :job="job" />
+      <job-card v-else v-for="job in jobs" :job="job" :key="job.id" />
     </main>
   </content-wrapper>
 </template>
 
-<script setup>
-// PAGE DATA
-const jobs = ref(null)
-const loading = ref(true)
+<script>
+import fetchJobs from "../utils/fetchJobs";
 
-// QUERY DATA
-const searchQuery = ref('')
-const page = ref(1)
-const location = ref('Manchester')
-const sort = ref(null)
+export default {
+  data() {
+    return {
+      jobs: {},
+      searchQuery: "",
+      page: "1",
+      location: "Manchester",
+      sort: null,
+      pending: true,
+    };
+  },
+  methods: {
+    async handleSearch({ title, page, location, sort }) {
+      console.log("SEARCH");
+      const { data, pending, error } = await fetchJobs({
+        title,
+        page,
+        location,
+        sort,
+      });
 
-// FUNCTIONS
-const handleNextPage = () => page.value += 1
-const handlePrevPage = () => page.value -= 1
+      if (!data.value || error.value) return;
 
-const handleSearch = async () => {
-  const options = {
-    method: "GET",
-    url: "https://jobhack2.herokuapp.com/api/reed",
-    params: { title: searchQuery, page, location, sort },
-    headers: {
-      "ContentType": "application/json"
-    }
-  }
-
-  const { data, pending } = await useFetch('https://jobhack2.herokuapp.com/api/reed', options)
-
-  jobs.value = data.value.jobs
-  loading.value = pending.value
-}
+      this.jobs = data.value.jobs;
+      this.pending = pending.value;
+    },
+  },
+  async created() {
+    await this.handleSearch({
+      title: "React",
+      location: "Manchester",
+      page: 1,
+      sort: null,
+    });
+  },
+};
 </script>
 <style lang="scss"></style>

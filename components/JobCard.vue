@@ -1,8 +1,8 @@
 <template>
     <article class="JobCard-Container">
-        <p>{{ props.job.title }}</p>
-        <p>{{ props.job.description }}</p>
+        <h3>{{ props.job.title }}</h3>
         <p>{{ props.job.company }}</p>
+        <p>{{ props.job.description }}</p>
     </article>
 </template>
 
@@ -18,7 +18,8 @@ const props = defineProps({
 
 <style lang="scss">
 .JobCard-Container {
+    margin: 1rem 0;
     border: 1px solid #f5f5f5;
-    padding: .4rem auto;
+    padding: .4rem .8rem;
 }
 </style>
