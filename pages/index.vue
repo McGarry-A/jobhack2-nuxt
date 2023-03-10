@@ -27,22 +27,7 @@
 import { jobListMixin } from "~~/mixins/jobList";
 
 export default {
-  mixins: [
-    jobListMixin({
-      title: this.title,
-      page: this.page,
-      location: this.location,
-      sort: this.sort,
-    }),
-  ],
-  data: function() {
-    return {
-      title: "React",
-      page: "1",
-      location: "Manchester",
-      sort: null,
-    };
-  },
+  mixins: [jobListMixin],
 };
 </script>
 
