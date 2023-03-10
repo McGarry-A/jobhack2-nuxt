@@ -2,10 +2,12 @@
   <nav class="NavbarMenu">
     <content-wrapper>
       <ul class="NavbarMenu-List">
-        <li class="NavbarMenu-ListItem">Home</li>
-        <li class="NavbarMenu-ListItem">Contact</li>
+        <li class="NavbarMenu-ListItem"><NuxtLink to="/">Home</NuxtLink></li>
+        <li class="NavbarMenu-ListItem">
+          <NuxtLink to="/contact">Contact</NuxtLink>
+        </li>
         <li class="NavbarMenu-ListItem NavbarMenu-ListItemButton">
-          My Account
+          <NuxtLink to="register"> My Account </NuxtLink>
         </li>
       </ul>
     </content-wrapper>

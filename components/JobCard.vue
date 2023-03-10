@@ -1,25 +1,35 @@
 <template>
+  <NuxtLink :to="linkTo">
     <article class="JobCard-Container">
-        <h3>{{ props.job.title }}</h3>
-        <p>{{ props.job.company }}</p>
-        <p>{{ props.job.description }}</p>
+      <h3>{{ job.title }}</h3>
+      <p>{{ job.company }}</p>
+      <p>{{ job.description }}</p>
     </article>
+  </NuxtLink>
 </template>
 
-<script setup>
-const props = defineProps({
+<script>
+export default {
+  props: {
     job: {
-        title: String,
-        description: String,
-        company: String,
-    }
-})
+      title: String,
+      description: String,
+      company: String,
+      id: String,
+    },
+  },
+  computed: {
+    linkTo() {
+      return `/job/${this.job.id}`;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
 .JobCard-Container {
-    margin: 1rem 0;
-    border: 1px solid #f5f5f5;
-    padding: .4rem .8rem;
+  margin: 1rem 0;
+  border: 1px solid #f5f5f5;
+  padding: 0.4rem 0.8rem;
 }
 </style>
