@@ -4,18 +4,14 @@
     <form
       @submit.prevent="
         handleSearch({
-          title: this.searchQuery,
+          title: this.title,
           location: this.location,
           sort: this.sort,
           page: this.page,
         })
       "
     >
-      <input
-        type="text"
-        placeholder="Search for a role here"
-        v-model="searchQuery"
-      />
+      <input type="text" placeholder="Search for a role here" v-model="title" />
       <button type="submit">Submit</button>
     </form>
     <main>
@@ -28,43 +24,11 @@
 </template>
 
 <script>
-import fetchJobs from "../utils/fetchJobs";
+import { jobListMixin } from "~~/mixins/jobList";
 
 export default {
-  data() {
-    return {
-      jobs: {},
-      searchQuery: "",
-      page: "1",
-      location: "Manchester",
-      sort: null,
-      pending: true,
-    };
-  },
-  methods: {
-    async handleSearch({ title, page, location, sort }) {
-      console.log("SEARCH");
-      const { data, pending, error } = await fetchJobs({
-        title,
-        page,
-        location,
-        sort,
-      });
-
-      if (!data.value || error.value) return;
-
-      this.jobs = data.value.jobs;
-      this.pending = pending.value;
-    },
-  },
-  async created() {
-    await this.handleSearch({
-      title: "React",
-      location: "Manchester",
-      page: 1,
-      sort: null,
-    });
-  },
+  mixins: [jobListMixin],
 };
 </script>
+
 <style lang="scss"></style>
