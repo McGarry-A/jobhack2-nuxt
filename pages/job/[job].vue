@@ -1,11 +1,14 @@
 <template>
   <div>
-    <h1>{{ job.jobTitle }}</h1>
-    <h2>{{ job.employerName }}</h2>
-    <p>{{ job.jobDescription }}</p>
-    <p>
-      <i>{{ job.salary }}</i>
-    </p>
+    <div v-if="pending">Loading...</div>
+    <div v-else>
+      <h1>{{ job.jobTitle }}</h1>
+      <h2>{{ job.employerName }}</h2>
+      <p>{{ job.jobDescription }}</p>
+      <p>
+        <i>{{ job.salary }}</i>
+      </p>
+    </div>
   </div>
 </template>
 

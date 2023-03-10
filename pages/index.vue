@@ -1,5 +1,4 @@
 <template>
-  <navbar-menu></navbar-menu>
   <content-wrapper>
     <form
       @submit.prevent="
