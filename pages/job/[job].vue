@@ -8,12 +8,15 @@
       <p>
         <i>{{ job.salary }}</i>
       </p>
+      <button @click="addToJobs">Add To My Jobs</button>
     </div>
   </div>
 </template>
 
 <script>
 import { fetchJobDetails } from "../../utils/fetchJobDetails";
+import myJobsStore from "~~/store/myJobs";
+
 export default {
   data: function () {
     return {
@@ -21,6 +24,12 @@ export default {
       job: {},
       pending: true,
     };
+  },
+  methods: {
+    addToJobs() {
+      console.log("Adding to jobs!");
+      myJobsStore.commit("addToJobs", this.job);
+    },
   },
   async mounted() {
     const { data, pending } = await fetchJobDetails(this.jobId);

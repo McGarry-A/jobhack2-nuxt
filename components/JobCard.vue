@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import myJobsStore from "~~/store/myJobs";
+
 export default {
   props: {
     job: {
