@@ -7,7 +7,7 @@
           <NuxtLink to="/contact">Contact</NuxtLink>
         </li>
         <li class="NavbarMenu-ListItem NavbarMenu-ListItemButton">
-          <NuxtLink to="register"> My Account </NuxtLink>
+          <NuxtLink to="my-jobs"> My Account </NuxtLink>
         </li>
       </ul>
     </content-wrapper>
