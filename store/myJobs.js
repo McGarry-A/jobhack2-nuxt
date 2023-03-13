@@ -13,9 +13,8 @@ const myJobsStore = createStore({
       console.log(state);
     },
     removeFromJobs(state, payload) {
-      return state.myJobs.filter((job) => {
-        return job.jobId === payload;
-      });
+      const index = state.myJobs.map(({ jobId }) => jobId).indexOf(payload)
+      state.myJobs.splice(index, 1)
     },
   },
   actions: {
